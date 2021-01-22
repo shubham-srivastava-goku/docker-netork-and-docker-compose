@@ -27,3 +27,5 @@ Docker Compose:
     docker-compose down to stop and remove all containers and network. It does not delete volumes by default.
 
     Use -v with it to remove volume too.
+
+    Use --build to rebuild the images used in docker
