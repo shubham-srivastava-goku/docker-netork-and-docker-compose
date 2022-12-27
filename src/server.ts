@@ -1,12 +1,11 @@
 import express from 'express';
 import http from 'http';
-import bodyParser from 'body-parser';
 import Mongoose from 'mongoose';
 import routes from './routes';
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use('/', routes);
 
 const connectToDatabase = (): Promise<typeof Mongoose> => {

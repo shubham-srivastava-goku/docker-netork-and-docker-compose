@@ -1,14 +1,18 @@
-FROM node:14-alpine
+FROM node:18.12-slim
 
 WORKDIR /app
 
-COPY package.json .
+COPY package.json package-lock.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 
-ENV DBIP host.docker.internal
+# If mongo is running on local host
+# ENV DBIP host.docker.internal
+
+# If mongo server is part of same network as node server
+ENV DBIP mongo
 
 ENV PORT 80
 

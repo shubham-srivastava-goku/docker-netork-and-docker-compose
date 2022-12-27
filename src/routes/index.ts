@@ -14,15 +14,13 @@ router.get('/favorites', async (req, res) => {
 });
 
 router.post('/favorites', async (req, res) => {
-  const favName = req.body.name;
-  const favType = req.body.type;
-  const favUrl = req.body.url;
+  const { name, type, url } = req.body;
 
   try {
-    if (favType !== 'movie' && favType !== 'character') {
+    if (type !== 'movie' && url !== 'character') {
       throw new Error('"type" should be "movie" or "character"!');
     }
-    const existingFav = await Favorite.findOne({ name: favName });
+    const existingFav = await Favorite.findOne({ name });
     if (existingFav) {
       throw new Error('Favorite exists already!');
     }
@@ -31,9 +29,9 @@ router.post('/favorites', async (req, res) => {
   }
 
   const favorite = new Favorite({
-    name: favName,
-    type: favType,
-    url: favUrl,
+    name,
+    type,
+    url,
   });
 
   try {
@@ -46,6 +44,17 @@ router.post('/favorites', async (req, res) => {
   }
 });
 
+router.get('/movies2', async (req, res) => {
+  try {
+    console.log('Inside movies endpoint');
+    const response = await axios.get('http://docker-test/movies');
+    console.log(response);
+    res.status(200).json({ movies: response.data });
+  } catch (error) {
+    console.log('Error inside movie endpoint = ', error.message);
+    res.status(500).json({ message: 'Something went wrong.' });
+  }
+});
 
 router.get('/movies', async (req, res) => {
   try {
