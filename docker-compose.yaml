@@ -4,6 +4,7 @@ services:
   # These service name will also be memorised by docker.
   # We can use the name in place of IP to access it.
     image: 'mongo'
+    # Named volume
     volumes:
       - data:/data/db
     # environment:
@@ -17,8 +18,12 @@ services:
       # context: ./
       # dockerfile: Dockerfile
       # It is not needed if the file name is Dockerfile.
+    # pass these 2 to achieve docker run -it
+    # stdin_open: true # To run in interactive mode
+    # tty: true # Allocate a pseudo-TTY
     ports:
       - '8080:80'
+    # Bind mout
     volumes:
       - ./src:/app/src
     environment:
@@ -27,6 +32,4 @@ services:
       - mongodb
 volumes:
   data:
-
-
 # named volues should be specified here.
