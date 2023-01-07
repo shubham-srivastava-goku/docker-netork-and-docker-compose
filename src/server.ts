@@ -23,7 +23,7 @@ const connectToDatabase = (): Promise<typeof Mongoose> => {
 const startServer = async () => {
   try {
     await connectToDatabase();
-    console.log('DB Connected');
+    console.log('DB Connected!!');
     const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
     http.createServer(app).listen(port, () => {
       console.log(`Server started at port ${port}`);
