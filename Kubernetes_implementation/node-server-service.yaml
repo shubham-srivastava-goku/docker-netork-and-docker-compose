@@ -6,11 +6,10 @@ metadata:
     name: node-server-service
     app: movies-app
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 30004
   selector:
     name: server-pod
     app: movies-app
