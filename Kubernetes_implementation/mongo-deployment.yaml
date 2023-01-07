@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+  labels:
+    name: mongo-deployment
+    app: movies-app
+spec:
+  template:
+    metadata:
+      name: mongo-pod
+      labels:
+        name: mongo-pod
+        app: movies-app
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo
+          ports:
+            - containerPort: 80
+  replicas: 2
+  selector:
+    matchLabels:
+      name: mongo-pod
+      app: movies-app

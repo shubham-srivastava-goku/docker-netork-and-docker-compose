@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-server-deployment
+  labels:
+    name: node-server-deployment
+    app: movies-app
+spec:
+  template:
+    metadata:
+      name: server-pod
+      labels:
+        name: server-pod
+        app: movies-app
+    spec:
+      containers:
+        - name: server
+          image: gokupronoob/docker-node
+          ports:
+            - containerPort: 80
+  replicas: 2
+  selector:
+    matchLabels:
+      name: server-pod
+      app: movies-app
+    

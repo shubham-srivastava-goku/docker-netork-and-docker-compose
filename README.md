@@ -24,3 +24,6 @@ We can create netowrk inside docker using `docker network create network-name`. 
 - docker-compose down to stop and remove all containers and network. It does not delete volumes by default.
     - Use -v with it to remove volume too.
 - Use --build to rebuild the images used in docker
+
+
+sudo systemctl restart docker.socket docker.service - reset docker 
